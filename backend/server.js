@@ -9,6 +9,6 @@ app.use(cors());
 app.listen(port, () => {console.log("-- Server is running on " + port + " port --")});
 
 app.get("/truthTable", (req, res) => {
-    
-    res.send("Pronto, toma essa tabela aí que eu fiz pra vc");
+    console.log("request received on truthTable");
+    res.send("Você recebeu uma linda tabela imaginária :D");
 });

@@ -1,8 +1,7 @@
 # About
 
-This is the repository to our logic college work. The objective is to create a tool that generates a truth table from a logic expression entered by the user.
-This project contains both **backend** and **frontend** files.
-
+In our college "Introduction to Logic" class we were asked to create our own truth table generator. This is a web tool that creates a truth table from a given logic expression string by the user.
+This project contains both **backend** and **frontend** project files.
 
 # Backend
 It's built with Node.js and Express. 
@@ -18,5 +17,5 @@ It's built using Vue + Vuetify.
 To run, just do:
 >npm install
 
-
-
+## How to get a truth table from our backend using request
+If you want to get a table using your application, you can use access our "truthTable" endpoint using a GET request.

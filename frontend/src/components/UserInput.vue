@@ -1,14 +1,33 @@
 <template>
   <v-container>
-    <v-row class="text-center">
-      <v-col cols="12">
-        <v-text-field label="Digite aqui sua expressão lógica"></v-text-field>
-        <v-btn @click="sendLogicExpression">Clique pra pedir a tabela pro backend</v-btn>
-      </v-col>
+    <v-row class="d-flex justify-center mb-6">
+      <v-col cols="12" sm="10">
+        <v-text-field 
+          label="Digite aqui sua expressão lógica"
+          type="text"
+          v-model="logicExpression"
+        >
+        </v-text-field>
+        <div class="d-flex justify-center mb-6">
+          <v-btn 
+            @click="sendLogicExpression"
+          >
+            Clique pra pedir a tabela pro backend
+          </v-btn>
+        </div>
+      </v-col> 
     </v-row>
-      <p>{{ tableString }}</p>
     <v-row>
-      
+      <v-col cols="12" class="d-flex justify-center mb-6">
+        <v-data-table
+          v-if="truthTable"
+          :headers="truthTable.header"
+          :items="truthTable.rows"
+          class="elevation-1"
+          hide-default-footer
+        >
+        </v-data-table>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -18,17 +37,20 @@ const axios = require('axios');
 
 export default {
   name: "HelloWorld",
-  data: () => ({
-    tableString: ""
-  }),
+  data(){
+    return {
+      logicExpression: "",
+      truthTable: null}
+  },
   created(){
   },
   methods: {
     //makes a request to backend and sets the answer
     sendLogicExpression(){
-      axios.get('http://localhost:3000/truthTable')
+      let expression = this.logicExpression;
+      axios.get('http://localhost:3000/truthTable', {params: {expression}})
       .then((response) => {
-        this.tableString = response.data;
+        this.truthTable = response.data;
       })
       .catch((error) => {
         console.log(error);

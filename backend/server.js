@@ -19,7 +19,7 @@ app.get("/truthTable", (req, res) => {
     console.log(logicExpression);
     console.log("It received the following string as parameter: " + logicExpression);
     // where the magic happens
-    let table = truthTableGenerator.generateTable(req.query.logicExpression);
+    let table = truthTableGenerator.generateTable(logicExpression);
     
     // if we don't have our generator ready yet, this is just a mock of how a table should be
     let mockTable = {

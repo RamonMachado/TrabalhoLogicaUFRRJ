@@ -11,10 +11,11 @@ function tokenize(formula) {
         literal += formula[i];
         token = getToken(literal);
         
-        if(token != 0){
+        if(token != null){
             vetor.push({
                 literal: literal,
-                token: token
+                token: token.content,
+                type: token.type
             });
             literal = "";
         }
@@ -26,16 +27,18 @@ function tokenize(formula) {
 function getToken(char) {
     switch(char){
         case "^":
-            return "TK_AND";
+            return {content: "TK_AND", type: "operator"};
         case "~":
-            return "TK_NOT";
+            return {content: "TK_NOT", type: "operator"};
         case "v":
-            return "TK_OR";
+            return {content: "TK_OR", type: "operator"};
         case "->":
-            return "TK_IMPLIES";
+            return {content: "TK_IMPLIES", type: "operator"};
         case "<->":
-            return "TK_IFF";
+            return {content: "TK_IFF", type: "operator"};
+        case (char.match(/[A-Z]/) || {}).input: 
+            return {content: char, type: "variable"};
         default:
-            return 0;
+            return null;
     }
 }

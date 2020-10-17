@@ -16,7 +16,6 @@ app.listen(port, () => {console.log("-- Server is running on " + port + " port -
 app.get("/truthTable", (req, res) => {
     console.log("\nRequest received on truthTable");
     let logicExpression = req.query.expression || "";
-    console.log(logicExpression);
     console.log("It received the following string as parameter: " + logicExpression);
     // where the magic happens
     let table = truthTableGenerator.generateTable(logicExpression);

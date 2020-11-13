@@ -32,6 +32,10 @@ function getToken(char) {
             return {content: "TK_IMPLIES", type: "operator"};
         case "<->":
             return {content: "TK_IFF", type: "operator"};
+        case "(":
+            return {content: "(", type: "bracket"};
+        case ")":
+            return {content: ")", type: "bracket"};            
         case (char.match(/[A-Z]/) || {}).input: 
             return {content: char, type: "variable"};
         default:

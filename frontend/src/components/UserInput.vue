@@ -12,7 +12,7 @@
           <v-btn 
             @click="sendLogicExpression"
           >
-            Clique pra pedir a tabela pro backend
+            Gerar Tabela Verdade
           </v-btn>
         </div>
       </v-col> 
@@ -48,7 +48,7 @@ export default {
     //makes a request to backend and sets the answer
     sendLogicExpression(){
       let expression = this.logicExpression;
-      axios.get('http://localhost:3000/truthTable', {params: {expression}})
+      axios.get('https://truthtablegenerator2000-ramon.rj.r.appspot.com/truthTable', {params: {expression}})
       .then((response) => {
         this.truthTable = response.data;
       })

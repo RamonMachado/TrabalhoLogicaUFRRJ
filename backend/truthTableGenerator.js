@@ -14,7 +14,6 @@ exports.generateTable = function(logicExpression) {
     let rows = generateRows(parsedTree, symbolsList, expression);
     let header = generateTableHeader(symbolsList, expression);
     return {header: header, rows: rows};
-
 };
 
 function sanitizeInput(logicExpression){

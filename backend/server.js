@@ -6,7 +6,7 @@ const cors = require('cors');
 const truthTableGenerator = require('./truthTableGenerator');
 
 // listens to this port below
-const port = 3000;
+const port = 8080;
 const app = express();
 
 app.use(cors());

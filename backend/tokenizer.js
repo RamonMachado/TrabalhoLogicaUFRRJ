@@ -37,7 +37,7 @@ function getToken(char) {
         case ")":
             return {content: ")", type: "bracket"};            
         case (char.match(/[A-Z]/) || {}).input: 
-            return {content: char, type: "variable"};
+            return {content: "TK_SYMBOL", type: "variable"};
         default:
             return null;
     }

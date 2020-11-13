@@ -29,7 +29,7 @@
           text
         >
           Veja o código-fonte no github&nbsp;
-          <v-icon>fab fa-github</v-icon>
+          <v-icon right>fab fa-github</v-icon>
         </v-btn>
       </v-row>
 

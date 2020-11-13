@@ -50,32 +50,34 @@
       </v-col>
 
       <v-col cols="12" md="6" sm="12">
-        <div v-if="truthTable">
-            <v-data-table 
-              :headers="truthTable.header"
-              :items="truthTable.rows"
-              class="elevation-1"
-              :items-per-page="5"
-            >
-            </v-data-table>
-            <div class="d-flex justify-center mb-6">
-            <v-btn
-              class="ma-6" 
-              @click="resetTable"
-              color="primary"
-            >
-                Remover Tabela
-            </v-btn>
-            <v-btn
-              class="ma-6 white--text" 
-              @click="share"
-              color="primary"
-            >
-                Compatilhar
-                <i class="fas fa-share-alt"></i>
-            </v-btn>
-            </div>
-        </div>
+          <div v-if="truthTable">
+              <div class="d-flex justify-center">
+                <v-btn
+                  class="ma-3" 
+                  @click="resetTable"
+                  text
+                >
+                    Remover Tabela
+                </v-btn>
+                <v-btn
+                  class="ma-3" 
+                  @click="share"
+                  text
+                >
+                    Compatilhar
+                    <v-icon right>fas fa-share-alt</v-icon>
+                </v-btn>
+              </div>
+              <div class="d-flex justify-center mb-6">
+                <v-data-table 
+                  :headers="truthTable.header"
+                  :items="truthTable.rows"
+                  class="elevation-1"
+                  :items-per-page="5"
+                >
+                </v-data-table>
+              </div>
+          </div>
       </v-col>
     </v-row> 
 

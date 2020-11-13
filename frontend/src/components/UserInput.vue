@@ -24,7 +24,7 @@
           :headers="truthTable.header"
           :items="truthTable.rows"
           class="elevation-1"
-          hide-default-footer
+          :items-per-page="5"
         >
         </v-data-table>
       </v-col>

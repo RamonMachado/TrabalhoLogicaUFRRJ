@@ -27,7 +27,7 @@ function parse_primary(iter) {
         if(maybeClosedBracket.done || maybeClosedBracket.element.token !== ')') {
             throw "primary falhou";
         }
-
+        iter.consume();
         return binops;
     }
 

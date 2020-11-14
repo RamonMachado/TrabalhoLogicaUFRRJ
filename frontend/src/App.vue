@@ -3,7 +3,7 @@
     <v-app-bar app color="primary" dark>
       <v-toolbar-title
         @click="$router.push('/')"
-        class="display-1"
+        class="text-h6"
         style="cursor:pointer"
       >
         Truth Table Generator 2000

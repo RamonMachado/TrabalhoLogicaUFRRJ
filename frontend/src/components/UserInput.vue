@@ -63,10 +63,47 @@
                   class="ma-3" 
                   @click="share"
                   text
+                  @click.stop="shareDialog = true"
                 >
                     Compatilhar
                     <v-icon right>fas fa-share-alt</v-icon>
                 </v-btn>
+
+                <v-dialog
+                  v-model="shareDialog"
+                  max-width="400"
+                >
+                  <v-card>
+                    <v-card-title>Compartilhar</v-card-title>
+                    <v-card-text>
+                      <v-text-field
+                        :value="tableAdress"
+                        readonly
+                      >
+                      </v-text-field>
+                    </v-card-text>
+               
+                    <v-card-actions>
+                      <v-btn
+                        text
+                        class="ma-3"
+                        @click="copyLinkToClipboard"
+                      >
+                        Copiar Link
+                        <v-icon right >far fa-copy</v-icon>
+                      </v-btn>
+                      <v-spacer></v-spacer>
+                      <v-btn
+                        class="ma-3"
+                        color="primary"
+                        @click="shareDialog = false"
+                      >
+                        Fechar
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+
               </div>
               <div class="d-flex justify-center mb-6">
                 <v-data-table 
@@ -74,7 +111,17 @@
                   :items="truthTable.rows"
                   class="elevation-1"
                   :items-per-page="5"
+                  multi-sort
                 >
+                  <template v-slot:body="{ items }">
+                    <tbody>
+                      <tr :class="item[Object.keys(item)[Object.keys(item).length - 1]] == true ? 'custom-highlight-row' : ''" v-for="(item, index) in items" :key="Object.keys(item)[0]+index">
+                        <td v-for="col in item" :key="Object.keys(col)[0]">
+                          {{ col }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </template>
                 </v-data-table>
               </div>
           </div>
@@ -91,15 +138,22 @@ export default {
   name: "HelloWorld",
   data(){
     return {
-      logicExpression: "",
-      truthTable: null}
+      mainAdress: "https://truthtablegenerator2000.web.app",
+      logicExpression: this.$route.query.logicExpression ? this.$route.query.logicExpression : "",
+      truthTable: null,
+      shareDialog: false
+    }
   },
   created(){
+    this.getTableOnLoad();
   },
   methods: {
     //makes a request to backend and sets the answer
     sendLogicExpression(){
       let expression = this.logicExpression;
+      let query = {...this.$route.query};
+      query.logicExpression = this.logicExpression;
+      this.$router.replace({query: query});
       axios.get('https://truthtablegenerator2000-ramon.rj.r.appspot.com/truthTable', {params: {expression}})
       .then((response) => {
         this.truthTable = response.data;
@@ -111,7 +165,26 @@ export default {
     resetTable(){
       this.truthTable = null;
       this.logicExpression = "";
+    },
+    getTableOnLoad(){
+      if(this.logicExpression != ""){
+        this.sendLogicExpression();
+      }
+    },
+    copyLinkToClipboard(){
+      navigator.clipboard.writeText(this.tableAdress);
+    }
+  },
+  computed: {
+    tableAdress(){
+      return this.mainAdress +  this.$route.fullPath;
     }
   }
 };
 </script>
+
+<style scoped>
+.custom-highlight-row{
+  background-color: rgb(209, 255, 209)
+}
+</style>

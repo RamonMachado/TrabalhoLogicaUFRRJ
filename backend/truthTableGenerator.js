@@ -9,7 +9,6 @@ exports.generateTable = function(logicExpression) {
     let tokens = tokenizer.tokenize(expression);
     let iteratorObject = iterator.iterator(tokens);
     let parsedTree = parser.parse(iteratorObject);
-    console.log(tokens);
     let symbolsList = getSymbolsList(tokens);
     let rows = generateRows(parsedTree, symbolsList, expression);
     let header = generateTableHeader(symbolsList, expression);
@@ -56,22 +55,3 @@ function generateTableHeader(symbols, expression){
 function dec2bin(dec){
     return (dec >>> 0).toString(2);
 }
-
-/*
-3s = 2^3 = 8
-
-1000
-
-0000
-0001
-0010
-0011
-0100
-0101
-0110
-0111
-1000
-1001
-1010
-1011
-*/

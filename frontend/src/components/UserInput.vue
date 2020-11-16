@@ -23,7 +23,7 @@
               Como usar
             </v-card-title>
             <v-card-text>
-              Digite a expressão lógica no campo acima e clique no botão "Gerar Tabela".<br />
+              Digite a expressão lógica no campo acima e clique no botão "Gerar Tabela Verdade".<br />
               <br />
               Regras
               <ul>
@@ -38,12 +38,17 @@
                 </li>
               </ul>
               <br />
-              Operadores Suportados
+              Operadores
               <ul>
-                <li>^ - AND</li>
-                <li>v - OR</li>
-                <li>-&gt; - IMPLIES</li>
-                <li>&lt;-&gt; - IF AND ONLY IF</li>
+                <li>AND: ^</li>
+                <li>OR: v</li>
+                <li>IMPLIES: -&gt;</li>
+                <li>IF AND ONLY IF: &lt;-&gt;</li>
+              </ul>
+              <br />
+              Operadores Unários
+              <ul>
+                <li>NOT: ~</li>
               </ul>
             </v-card-text>
           </v-card>

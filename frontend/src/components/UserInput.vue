@@ -168,7 +168,7 @@ export default {
       let query = {...this.$route.query};
       query.logicExpression = this.logicExpression;
       this.$router.replace({query: query});
-      axios.get(process.env.VUE_APP_REQUEST_TABLE_BACKEND + 'truthTable', {params: {expression}})
+      axios.get(process.env.VUE_APP_REQUEST_TABLE_BACKEND + '/truthTable', {params: {expression}})
       .then((response) => {
         this.truthTable = response.data;
       })

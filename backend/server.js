@@ -21,12 +21,11 @@ app.get("/truthTable", (req, res) => {
     try{
         // where the magic happens
         let table = truthTableGenerator.generateTable(logicExpression);
-
         // finally delivers our table to our requester
         res.send(table);
         console.log("-> truthTable delivered");
     } catch (err) {
-        res.status(err.statusCode()).send({erro: err.message});
+        res.status(err.statusCode()).send({message: err.message});
     }
     
 }); 

@@ -65,7 +65,7 @@
                   text
                   @click.stop="shareDialog = true"
                 >
-                    Compatilhar
+                    Compartilhar
                     <v-icon right>fas fa-share-alt</v-icon>
                 </v-btn>
 
@@ -77,7 +77,7 @@
                     <v-card-title>Compartilhar</v-card-title>
                     <v-card-text>
                       <v-text-field
-                        :value="tableAdress"
+                        :value="tableAddress"
                         readonly
                       >
                       </v-text-field>
@@ -125,6 +125,17 @@
                 </v-data-table>
               </div>
           </div>
+          <div v-if="tableError">
+            <v-alert
+              color="red"
+              dismissible
+              elevation="7"
+              icon=""
+              type="error"
+            >
+              {{ errorMessage }}
+            </v-alert>
+          </div>
       </v-col>
     </v-row> 
 
@@ -138,9 +149,11 @@ export default {
   name: "HelloWorld",
   data(){
     return {
-      mainAdress: "https://truthtablegenerator2000.web.app",
+      mainAddress: process.env.VUE_APP_MAIN_ADDRESS,
       logicExpression: this.$route.query.logicExpression ? this.$route.query.logicExpression : "",
       truthTable: null,
+      errorMessage: "",
+      tableError: false,
       shareDialog: false
     }
   },
@@ -150,16 +163,22 @@ export default {
   methods: {
     //makes a request to backend and sets the answer
     sendLogicExpression(){
+      this.tableError = false;
       let expression = this.logicExpression;
       let query = {...this.$route.query};
       query.logicExpression = this.logicExpression;
       this.$router.replace({query: query});
-      axios.get('https://truthtablegenerator2000-ramon.rj.r.appspot.com/truthTable', {params: {expression}})
+      axios.get(process.env.VUE_APP_REQUEST_TABLE_BACKEND + 'truthTable', {params: {expression}})
       .then((response) => {
         this.truthTable = response.data;
       })
       .catch((error) => {
         console.log(error);
+        if(error.response){
+          this.truthTable = null;
+          this.errorMessage = error.response.data.message;
+          this.tableError = true;
+        }
       });
     },
     resetTable(){
@@ -172,12 +191,12 @@ export default {
       }
     },
     copyLinkToClipboard(){
-      navigator.clipboard.writeText(this.tableAdress);
+      navigator.clipboard.writeText(this.tableAddress);
     }
   },
   computed: {
-    tableAdress(){
-      return this.mainAdress +  this.$route.fullPath;
+    tableAddress(){
+      return this.mainAddress +  this.$route.fullPath;
     }
   }
 };

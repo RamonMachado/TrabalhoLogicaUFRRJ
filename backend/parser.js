@@ -1,4 +1,4 @@
-const SyntaxError = require('./Errors/syntaxError.js');
+const SyntaxError = require('./errors/syntaxError.js');
 
 function parse(iter) { 
     return parse_binops(iter);

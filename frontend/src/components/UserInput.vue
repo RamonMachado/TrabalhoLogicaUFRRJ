@@ -27,13 +27,13 @@
               <br />
               Regras
               <ul>
-                <li>Variáveis precisam ser maiúsculas.</li>
-                <li>Variáveis podem ter nomes de A a Z, com a exceção da letra V.</li>
-                <li>A prioridade de interpretação será sempre da direita para a esquerda.</li>
+                <li>Os símbolos proposicionais precisam ser maiúsculos.</li>
+                <li>Os símbolos proposicionais podem ser de A a Z.</li>
+                <li>A prioridade de interpretação será sempre da esquerda para a direita.</li>
                 <li>É necessário SEMPRE colocar parênteses para definir prioridades:
                     <ul>
                       <li>A^BvC - ERRADO</li>
-                      <li>(A^B)vC - CERTO</li>
+                      <li>A^(BvC) - CERTO</li>
                     </ul>
                 </li>
               </ul>
